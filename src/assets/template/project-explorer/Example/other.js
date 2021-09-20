@@ -1,0 +1,3 @@
+function myred() {
+  return 'red';
+}

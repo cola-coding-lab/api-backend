@@ -1,0 +1,15 @@
+{
+  "name": "Example",
+  "title": "Beispiel-Projekt",
+  "description": "Ein Beispielprojekt",
+  "files": [
+    {
+      "filename": "main.js",
+      "isHidden": false
+    },
+    {
+      "filename": "other.js",
+      "isHidden": true
+    }
+  ]
+}

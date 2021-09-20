@@ -36,11 +36,13 @@
   },
   "keywords": [],
   "dependencies": {
+    "binaryextensions": "^4.18.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.12.1",
     "module-alias": "^2.2.2",
+    "textextensions": "^5.14.0",
     "typescript-logging": "^1.0.0",
     "ws": "^8.2.2"
   },
