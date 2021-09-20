@@ -1,0 +1,23 @@
+{
+  "name": "Pong-final",
+  "title": "Pong mit p5.js",
+  "description": "Fertiges Pong für Demo",
+  "files": [
+    {
+      "filename": "main.js",
+      "isHidden": false
+    },
+    {
+      "filename": "util.js",
+      "isHidden": true
+    },
+    {
+      "filename": "ball.js",
+      "isHidden": false
+    },
+    {
+      "filename": "paddle.js",
+      "isHidden": false
+    }
+  ]
+}

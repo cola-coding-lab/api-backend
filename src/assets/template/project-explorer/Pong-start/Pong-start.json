@@ -1,0 +1,23 @@
+{
+  "name": "Pong start",
+  "title": "Pong mit p5.js",
+  "description": "Template für Pong, ein paar Dinge müssen von dir von ausprogrammiert werden. Siehe auch: https://mode.fh-joanneum.at/cola/pong-ws/-/tree/main/pong",
+  "files": [
+    {
+      "filename": "main.js",
+      "isHidden": false
+    },
+    {
+      "filename": "util.js",
+      "isHidden": true
+    },
+    {
+      "filename": "ball.js",
+      "isHidden": false
+    },
+    {
+      "filename": "paddle.js",
+      "isHidden": false
+    }
+  ]
+}
