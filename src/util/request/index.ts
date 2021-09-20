@@ -1,0 +1,1 @@
+export { requestDetails } from './details';
