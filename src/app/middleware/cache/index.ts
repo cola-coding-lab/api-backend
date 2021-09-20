@@ -25,7 +25,7 @@ export async function CacheControl(req: CacheRequest, res: Response, next: NextF
 
 function cacheExpired(ccHeader: string): boolean {
   if (!lastCache
-    || lastCache.getTime() < new Date(lastCache.getTime() + MAX_CACHE).getTime()
+    || lastCache.getTime() > new Date(lastCache.getTime() + MAX_CACHE).getTime()
     || ccHeader?.toLowerCase() === 'no-cache') {
     lastCache = new Date();
     return true;
