@@ -4,6 +4,7 @@ import { ExplorerRoute } from '@routes/v1/explorer';
 import { PwaRoute } from '@routes/v1/pwa';
 import { requestDetails } from '@util/request';
 import { Request, Response } from 'express';
+import { VCLRoute } from '@routes/v1/vcl';
 
 export class V1Router extends BaseRouter {
   constructor(validators?: Validators) {
@@ -13,6 +14,7 @@ export class V1Router extends BaseRouter {
   protected async routes(): Promise<void> {
     this.router.use('/explorer', CacheControl, ExplorerRoute.router);
     this.router.use('/pwa', PwaRoute.router);
+    this.router.use('/vcl', VCLRoute.router);
   }
 
   protected async getAll(req: Request, res: Response): Promise<void> {
