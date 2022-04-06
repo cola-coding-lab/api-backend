@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: cola-api-service
-    container_name: cola-api-service
+    image: vcl-api-service
+    container_name: vcl-api-service
     restart: unless-stopped
     ports:
       - "8065:8065"
