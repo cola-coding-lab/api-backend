@@ -15,10 +15,14 @@ COPY tsconfig*.json  ./
 COPY .eslintrc.json  ./
 COPY .eslintignore   ./
 COPY ./src           ./src
+
+## update npm to latest version
+RUN npm install -g npm@latest
+
 RUN npm ci --silent && npm run build
 
 ## stage 2, runnnig service
-FROM node:${NODE_VERSION}-slim
+FROM node:${NODE_VERSION}-slim as final
 
 WORKDIR "/app"
 
@@ -26,6 +30,10 @@ ENV NODE_ENV=production
 ENV SERVICE_PORT=8065
 
 COPY package*.json   ./
+
+## update npm to latest version
+RUN npm install -g npm@latest
+
 RUN npm ci --silent --only=${NODE_ENV}
 
 ## copy compiled files from stage 1
