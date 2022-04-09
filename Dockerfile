@@ -1,6 +1,6 @@
 ### Dockerfile with multi-stage build ###
 # used node-version
-ARG NODE_VERSION=14-stretch
+ARG NODE_VERSION=16-stretch
 
 ## stage 1, compile TypeScript
 FROM node:${NODE_VERSION} AS builder
