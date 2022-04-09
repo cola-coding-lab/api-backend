@@ -4,7 +4,7 @@ import { LogFactory } from '@util/logger';
 import { errorResponse } from '@util/response';
 import { NextFunction, Request, Response } from 'express';
 
-const LOGGER = LogFactory.getLogger('routing-error');
+const LOGGER = LogFactory('routing-error');
 
 /** RoutingError-Middleware to define default response when some unexpected error occurs on some route */
 export async function RoutingErrorHandler(err: Error, req: Request, res: Response, _next: NextFunction): Promise<void> {

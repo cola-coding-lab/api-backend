@@ -1,11 +1,24 @@
 import { NAME, NODE_ENV } from '@config/environment';
-import { LFService, Logger, LoggerFactoryOptions, LogGroupRule, LogLevel } from 'typescript-logging';
+import { createLogger, format, Logger, transports } from 'winston';
+import * as TransportStream from 'winston-transport';
 
-const logLevel = (NODE_ENV === 'production') ? LogLevel.Info : LogLevel.Trace;
-const options = new LoggerFactoryOptions()
-  .addLogGroupRule(new LogGroupRule(new RegExp('.+'), logLevel));
+const LogFactory = (label: string, customTransports?: TransportStream[]) => {
+  customTransports = customTransports ? customTransports : [];
+  return createLogger({
+    level: NODE_ENV === 'production' ? 'info' : 'debug',
+    format: format.combine(
+      format.label({ label }),
+      format.timestamp(),
+      format.printf(log => `${log.timestamp} ${log.level.toUpperCase()} [${log.label}] ${log.message}`),
+      format.colorize({ all: true })
+    ),
+    transports: [
+      new transports.Console(),
+      ...customTransports,
+    ]
+  });
+};
 
-export const LogFactory = LFService.createNamedLoggerFactory('ServiceLogger', options);
-export const LOG = LogFactory.getLogger(NAME);
+const logger = LogFactory(NAME);
 
-export { Logger };
+export { logger, Logger, LogFactory };

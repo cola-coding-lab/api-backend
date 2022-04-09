@@ -16,7 +16,7 @@ export default class App {
 
   protected constructor(private port: number) {
     this.app = express();
-    this.logger = LogFactory.getLogger(this.constructor.name);
+    this.logger = LogFactory(this.constructor.name);
   }
 
   public static start(port: number): void {

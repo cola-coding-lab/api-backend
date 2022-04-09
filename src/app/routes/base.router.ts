@@ -36,7 +36,7 @@ export type FormatData = {
 };
 
 export abstract class BaseRouter {
-  protected logger = LogFactory.getLogger(this.constructor.name);
+  protected logger = LogFactory(this.constructor.name);
   private readonly _router: Router;
 
   protected constructor(validators?: Validators) {

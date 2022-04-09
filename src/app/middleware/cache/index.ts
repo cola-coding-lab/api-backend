@@ -1,7 +1,7 @@
 import { LogFactory } from '@util/logger';
 import { NextFunction, Request, Response } from 'express';
 
-const LOGGER = LogFactory.getLogger('cache-control');
+const LOGGER = LogFactory('cache-control');
 const MAX_CACHE = 1000 * 60 * 5; // 5 minutes
 
 interface ICache {

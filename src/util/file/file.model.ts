@@ -21,7 +21,7 @@ export class File extends Serializable<SerializedFile> implements SerializedFile
 
   private readonly _parentName: string;
   private readonly _stats: fs.Stats;
-  private readonly logger = LogFactory.getLogger(this.constructor.name);
+  private readonly logger = LogFactory(this.constructor.name);
 
   constructor(private readonly _fullPath: string) {
     super();

@@ -4,7 +4,7 @@ import { LogFactory } from '@util/logger';
 import * as fs from 'fs';
 import path from 'path';
 
-const LOGGER = LogFactory.getLogger('FileReader');
+const LOGGER = LogFactory('FileReader');
 
 const CACHE = new Map<string, File>();
 

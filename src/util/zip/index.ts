@@ -7,7 +7,7 @@ import JSZip from 'jszip';
 import path from 'path';
 
 const OUTPUT = path.join(PATHS.ASSETS, 'generated');
-const LOGGER = LogFactory.getLogger('zip');
+const LOGGER = LogFactory('zip');
 
 export async function createZip(files: SerializedFile[], filePath: string): Promise<void> {
   const zip = new JSZip();

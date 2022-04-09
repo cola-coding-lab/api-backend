@@ -46,7 +46,7 @@
     "module-alias": "^2.2.2",
     "sharp": "^0.30.3",
     "textextensions": "^5.15.0",
-    "typescript-logging": "^1.0.0",
+    "winston": "^3.7.2",
     "ws": "^8.5.0"
   },
   "devDependencies": {
