@@ -167,11 +167,11 @@ export abstract class BaseRouter {
    */
   protected format(req: Request, res: Response, data: FormatData, status = RESPONSE_CODES.OK): void {
     const format: Record<string, () => void> = {
-      [CONTENT_TYPES.PLAIN]: () => {
-        res.send(data.plain);
-      },
       [CONTENT_TYPES.JSON]: () => {
         res.json(data.json);
+      },
+      [CONTENT_TYPES.PLAIN]: () => {
+        res.send(data.plain);
       },
       default: () => this.unsupportedContentType(req, res),
       ...data.custom,
