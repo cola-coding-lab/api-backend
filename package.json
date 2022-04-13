@@ -13,7 +13,7 @@
     "build": "npm run clean:dist && tsc",
     "build:dev": "tsc --p tsconfig.dev.json",
     "clean:dist": "rm -rf dist",
-    "lint": "tsc --noEmit && eslint \"src/**/*.{js,ts}\" --quiet --fix",
+    "lint": "tsc --noEmit && eslint \"src/**/*.{js,ts}\" --quiet",
     "postbuild": "copyup -a \"src/{assets,public}/*\" -e \"**/.gitkeep\" dist",
     "prebuild": "npm run lint",
     "start": "node .",
