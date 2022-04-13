@@ -41,6 +41,14 @@ npm run start:dev
 
 To build the project, run `npm run build` or take a look into the [Docker](#docker) section.
 
+Because [linting](.eslintrc.json) is set to force UNIX linebreak style, on windows run:
+
+```console
+git config --local core.autocrlf false
+```
+
+to avoid errors.
+
 ## Configuration
 
 See [.env.example](.env.example) for custom configuration. Create a copy `cp .env.example .env` and setup your
