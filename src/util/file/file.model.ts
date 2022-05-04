@@ -78,6 +78,10 @@ export class File extends Serializable<SerializedFile> implements SerializedFile
     return this._fullPath;
   }
 
+  public get inode(): number {
+    return this._stats.ino; // TODO: any security risks?
+  }
+
   private static getFileType(stats: fs.Stats): FileType {
     if (stats.isDirectory()) return FileType.DIR;
     if (stats.isSymbolicLink()) return FileType.LINK;
