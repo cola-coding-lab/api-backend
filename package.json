@@ -14,7 +14,7 @@
     "build:dev": "tsc --p tsconfig.dev.json",
     "clean:dist": "rm -rf dist",
     "lint": "tsc --noEmit && eslint \"src/**/*.{js,ts}\" --quiet",
-    "postbuild": "copyup -a \"src/{assets,public}/*\" -e \"**/.gitkeep\" dist",
+    "postbuild": "copyup -a \"src/{assets,public}/**/*\" -e \"**/.gitkeep\" dist",
     "prebuild": "npm run lint",
     "start": "node .",
     "start:dev": "nodemon",
