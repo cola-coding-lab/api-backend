@@ -1,7 +1,7 @@
 {
   "watch": ["src"],
   "ext": "ts",
-  "exec": "npm run prebuild --silent && npx ts-node --project tsconfig.dev.json -r tsconfig-paths/register ./src/server.ts",
+  "exec": "npx ts-node --project tsconfig.dev.json -r tsconfig-paths/register ./src/server.ts",
   "env": {
     "NODEMON": "development"
   },
