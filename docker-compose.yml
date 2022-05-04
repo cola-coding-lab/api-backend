@@ -11,6 +11,5 @@ services:
     ports:
       - "8065:8065"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - SERVICE_PORT=8065
-
