@@ -2,7 +2,7 @@ import { File } from '@util/file';
 
 export interface IScript {
   src?: string;
-  innerHTML? : string;
+  innerHTML?: string;
 }
 
 export interface ScriptFile {
@@ -40,12 +40,12 @@ export class Script implements ScriptFile {
 
   public static getFileType(extension: string): ScriptFileType {
     switch (extension.replace('.', '').toLowerCase()) {
-    case 'js':
-      return ScriptFileType.javascript;
-    case 'json':
-      return ScriptFileType.json;
-    default:
-      return ScriptFileType.plain;
+      case 'js':
+        return ScriptFileType.javascript;
+      case 'json':
+        return ScriptFileType.json;
+      default:
+        return ScriptFileType.plain;
     }
   }
 }
