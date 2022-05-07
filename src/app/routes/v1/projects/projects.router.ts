@@ -3,9 +3,11 @@ import { BaseRouter, Validators } from '@routes/base.router';
 import { File, FileTree, isDescriptionFile } from '@util/file';
 import { Response } from 'express';
 import { ExplorerDescription } from '@util/file/description-file';
+import { v5 } from 'uuid';
 
 // Todo: Extract to shared-types
 export interface Project {
+  id: string;
   name: string;
   title: string;
   description: string;
@@ -60,6 +62,7 @@ export class ProjectsRouter extends BaseRouter {
 
   private createProjects(): Project[] {
     if (!this.base) { return; }
+    const GUID = v5(`${this.base.name}/${this.base.inode}`, v5.DNS);
 
     function isDescription(file: File, parent: File): boolean {
       return !!(file.ext?.match(/json$/i) && file.name.match(parent.name));
@@ -86,7 +89,6 @@ export class ProjectsRouter extends BaseRouter {
       });
     }
 
-
     return this.base.children?.map<Project>(projectRoot => {
       const description = projectRoot.children?.find(child => isDescription(child, projectRoot));
       if (!description) { return; }
@@ -100,6 +102,7 @@ export class ProjectsRouter extends BaseRouter {
       });
       return {
         ...projectDescription,
+        id: v5(projectDescription.name, GUID),
         files,
         dirs: dirs.length > 0 ? dirs : undefined,
       };
