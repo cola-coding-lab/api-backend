@@ -1,6 +1,6 @@
 {
   "name": "vcl-api-service",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ReSTful API for CoLa VCL",
   "author": "Harald Schwab",
   "license": "ISC",
