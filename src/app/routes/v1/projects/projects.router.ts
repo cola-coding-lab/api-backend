@@ -42,7 +42,7 @@ export class ProjectsRouter extends BaseRouter {
 
   public init(noCache = true): void {
     this.base = FileTree(this.root, noCache);
-    this.projects = this.createProjects();
+    this.projects = this.createProjects().filter(p => p !== undefined && p !== null);
   }
 
   protected async getAll(req: CacheRequest, res: Response): Promise<void> {
@@ -91,7 +91,7 @@ export class ProjectsRouter extends BaseRouter {
 
     return this.base.children?.map<Project>(projectRoot => {
       const description = projectRoot.children?.find(child => isDescription(child, projectRoot));
-      if (!description) { return; }
+      if (!description) { return undefined; }
       const projectDescription = JSON.parse(description.content) as ExplorerDescription;
       let files: EditorFile[] = parseFiles(projectRoot.children, projectRoot);
       let dirs: Directory[] = parseDirectories(projectRoot.children);
