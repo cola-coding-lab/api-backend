@@ -56,7 +56,6 @@ export class PwaRouter extends BaseRouter {
       await createZip(compiled, `pwa/${req.body.pwa_title}.zip`);
 
       res.json(compiled);
-
     } else {
       await errorResponse(req, res,
         [new ResponseError(RESPONSE_CODES.SERVER_ERROR, 'could not create pwa')], RESPONSE_CODES.SERVER_ERROR);

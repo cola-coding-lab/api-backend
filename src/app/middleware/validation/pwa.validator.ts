@@ -18,7 +18,6 @@ export const pwaValidator: ValidationChain[] = [
     .withMessage('needs to be an array')
     .isLength({ min: 1 })
     .withMessage('needs at least one entry')
-    .escape()
     .bail(),
   body('pwa_css')
     .trim()
