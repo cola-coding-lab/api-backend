@@ -8,9 +8,8 @@ import { Serializable } from '@util/serialize';
 import { createZip } from '@util/zip';
 import { Request, Response } from 'express';
 import { v4 } from 'uuid';
-import path from 'path';
-import { PATHS } from '@config/environment';
-import * as fs from 'fs';
+import { save2Public } from '@util/pwa';
+import { Validate } from '@middleware/validation';
 
 export enum Place {
   generated = 'generated',
@@ -22,6 +21,16 @@ export class PwaRouter extends BaseRouter {
 
   private static getFileFrom(place: Place): File {
     return FileTree(`${place}/pwa`, true);
+  }
+
+  private static async addPwaImage(base64?: string): Promise<SerializedFile | undefined> {
+    const image = base64 ? Buffer.from(base64, 'base64') : undefined;
+    return getPwaImages(image);
+  }
+
+  protected async routes(_validators?: Validators): Promise<void> {
+    super.routes(_validators);
+    this.router.put('/', Validate(_validators.put), this.put);
   }
 
   protected async getAll(req: Request, res: Response): Promise<void> {
@@ -40,46 +49,57 @@ export class PwaRouter extends BaseRouter {
   }
 
   protected async post(req: Request, res: Response): Promise<void> {
-    const uuid = v4();
-    const base_href = path.join('/', 'public', uuid, '/');
+    if (req.query.zip !== undefined) {
+      await this.zip(req, res);
+    } else {
+      await this.publish(req, res);
+    }
+  }
+
+  protected async put(req: Request, res: Response): Promise<void> {
+    const uuid = req.params.key || v4();
+    const data = { base_href: `/public/${uuid}/`, ...req.body };
+    const files = await this.compile(data);
+    if (files) {
+      await save2Public(files, { uuid });
+      res.setHeader('Location', `${req.protocol}://${req.header('host')}${data.base_href}`);
+      res.json(files);
+    } else {
+      await errorResponse(req, res, [ new ResponseError(RESPONSE_CODES.SERVER_ERROR, 'could not create pwa') ], RESPONSE_CODES.SERVER_ERROR);
+    }
+  }
+
+  private async publish(req: Request, res: Response): Promise<void> {
+    req.params.key = v4();
+    await this.put(req, res);
+  }
+
+  private async zip(req: Request, res: Response): Promise<void> {
+    const files = await this.compile({ base_href: '/', ...req.body });
+    if (files) {
+      await createZip(files, `pwa/${req.body.pwa_title}.zip`);
+      res.json(files);
+    } else {
+      await errorResponse(req, res,
+        [ new ResponseError(RESPONSE_CODES.SERVER_ERROR, 'could not create pwa') ], RESPONSE_CODES.SERVER_ERROR);
+    }
+  }
+
+  private async compile(data: any): Promise<SerializedFile[]> {
     const pwa = PwaRouter.getFileFrom(Place.template);
-    const compiled = pwa?.children.map(function f(file: File): Serializable<SerializedFile> {
+    const files = pwa?.children.map(function f(file: File): Serializable<SerializedFile> {
       if (file?.isDirectory()) {
         const copy = file.copy;
         copy.children = copy.children.map(f) as File[];
         return copy;
       }
       if (TEMPLATE_EXT_REGEXP.test(file.ext || '')) {
-        return new TemplateFile(file, { base_href, ...req.body });
+        return new TemplateFile(file, data);
       }
       return file;
     }).map(m => m.serialize(true));
+    files?.push(await PwaRouter.addPwaImage(data.pwa_image));
 
-    if (compiled) {
-      const image = req.body.pwa_image ? Buffer.from(req.body.pwa_image, 'base64') : undefined;
-      compiled.push(await getPwaImages(image));
-
-      await save2Public(compiled, path.join(PATHS.PUBLIC, uuid));
-      await createZip(compiled, `pwa/${req.body.pwa_title}.zip`);
-
-      res.json(compiled);
-    } else {
-      await errorResponse(req, res,
-        [ new ResponseError(RESPONSE_CODES.SERVER_ERROR, 'could not create pwa') ], RESPONSE_CODES.SERVER_ERROR);
-    }
+    return files || [];
   }
-}
-
-
-async function save2Public(files: SerializedFile[], rootPath: string): Promise<void> {
-  fs.mkdirSync(rootPath);
-  files.forEach((file) => {
-    const filePath = path.join(rootPath, file.name);
-    if (file.children) {
-      save2Public(file.children, filePath);
-    } else {
-      const type = file.ext.match(/(png|jpe?g)/i) ? 'base64' : 'utf-8';
-      fs.writeFileSync(filePath, file.content, type);
-    }
-  });
 }
