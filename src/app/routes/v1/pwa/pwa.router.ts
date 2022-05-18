@@ -98,6 +98,7 @@ export class PwaRouter extends BaseRouter {
 
   private async compile(data: any): Promise<SerializedFile[]> {
     const pwa = PwaRouter.getFileFrom(Place.template);
+    data.version = new Date().getTime();
     const files = pwa?.children.map(function f(file: File): Serializable<SerializedFile> {
       if (file?.isDirectory()) {
         const copy = file.copy;
