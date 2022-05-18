@@ -10,6 +10,7 @@ import { Request, Response } from 'express';
 import { v4 } from 'uuid';
 import { save2Public } from '@util/pwa';
 import { Validate } from '@middleware/validation';
+import { PATHS } from '@config/environment';
 
 export enum Place {
   generated = 'generated',
@@ -28,9 +29,19 @@ export class PwaRouter extends BaseRouter {
     return getPwaImages(image);
   }
 
+  private static pwaUrl(req: Request, base_href: string): string {
+    return `${req.protocol}://${req.header('host')}${base_href}`;
+  }
+
   protected async routes(_validators?: Validators): Promise<void> {
     super.routes(_validators);
     this.router.put('/', Validate(_validators.put), this.put);
+    this.router.get('/overview', this.getOverview);
+  }
+
+  protected bind() {
+    super.bind();
+    this.getOverview = this.getOverview.bind(this);
   }
 
   protected async getAll(req: Request, res: Response): Promise<void> {
@@ -62,7 +73,7 @@ export class PwaRouter extends BaseRouter {
     const files = await this.compile(data);
     if (files) {
       await save2Public(files, { uuid });
-      res.setHeader('Location', `${req.protocol}://${req.header('host')}${data.base_href}`);
+      res.setHeader('Location', PwaRouter.pwaUrl(req, data.base_href));
       res.json(files);
     } else {
       await errorResponse(req, res, [ new ResponseError(RESPONSE_CODES.SERVER_ERROR, 'could not create pwa') ], RESPONSE_CODES.SERVER_ERROR);
@@ -101,5 +112,27 @@ export class PwaRouter extends BaseRouter {
     files?.push(await PwaRouter.addPwaImage(data.pwa_image));
 
     return files || [];
+  }
+
+  private async getOverview(req: Request, res: Response): Promise<void> {
+    const folders = FileTree(PATHS.PUBLIC);
+
+
+    res.json(folders.children.filter(f => f.isDirectory()).map(f => {
+      let title = 'Meine CoLa App';
+      let description = undefined;
+      const manifest = f.children.find(c => c.name === 'manifest.json');
+      if (manifest) {
+        const json = JSON.parse(manifest.content);
+        title = json.name;
+        description = json.description;
+      }
+
+      return {
+        url: PwaRouter.pwaUrl(req, `/public/${f.name}/`),
+        title,
+        description,
+      };
+    }));
   }
 }
