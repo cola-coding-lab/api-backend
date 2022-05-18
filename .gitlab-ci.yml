@@ -50,7 +50,5 @@ deploy:      # This job runs in the deploy stage.
   script:
     - echo "Deploying application..."
     - ls
-    - docker login $REGISTRY_URL -u $REGISTRY_USER -p $REGISTRY_PASS
-    - docker build . -t $REGISTRY_URL/vcl-api:latest
-    - docker push $REGISTRY_URL/vcl-api:latest
-    - echo "Application successfully deployed."
+    - docker info
+    - docker-compose info
