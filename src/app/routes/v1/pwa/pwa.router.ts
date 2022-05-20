@@ -116,8 +116,7 @@ export class PwaRouter extends BaseRouter {
   }
 
   private async getOverview(req: Request, res: Response): Promise<void> {
-    const folders = FileTree(PATHS.PUBLIC);
-
+    const folders = FileTree(PATHS.PUBLIC, true);
 
     res.json(folders.children.filter(f => f.isDirectory()).map(f => {
       let title = 'Meine CoLa App';
@@ -133,6 +132,8 @@ export class PwaRouter extends BaseRouter {
         url: PwaRouter.pwaUrl(req, `/public/${f.name}/`),
         title,
         description,
+        created: f.stats.birthtime,
+        modified: f.children.reduce((prev, current) => prev.stats.mtimeMs > current.stats.mtimeMs ? prev : current, f).stats.mtime
       };
     }));
   }
