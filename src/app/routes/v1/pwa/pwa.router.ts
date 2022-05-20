@@ -116,12 +116,12 @@ export class PwaRouter extends BaseRouter {
   }
 
   private async getOverview(req: Request, res: Response): Promise<void> {
-    const folders = FileTree(PATHS.PUBLIC, true);
+    const pub = FileTree(PATHS.PUBLIC, true);
 
-    res.json(folders.children.filter(f => f.isDirectory()).map(f => {
+    res.json(pub.children?.filter(f => f.isDirectory()).map(f => {
       let title = 'Meine CoLa App';
       let description = undefined;
-      const manifest = f.children.find(c => c.name === 'manifest.json');
+      const manifest = f.children?.find(c => c.name === 'manifest.json');
       if (manifest) {
         const json = JSON.parse(manifest.content);
         title = json.name;
@@ -133,7 +133,7 @@ export class PwaRouter extends BaseRouter {
         title,
         description,
         created: f.stats.birthtime,
-        modified: f.children.reduce((prev, current) => prev.stats.mtimeMs > current.stats.mtimeMs ? prev : current, f).stats.mtime
+        modified: f.children?.reduce((prev, current) => prev.stats.mtimeMs > current.stats.mtimeMs ? prev : current, f).stats.mtime
       };
     }));
   }
