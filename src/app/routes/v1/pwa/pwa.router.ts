@@ -118,7 +118,7 @@ export class PwaRouter extends BaseRouter {
   private async getOverview(req: Request, res: Response): Promise<void> {
     const pub = FileTree(PATHS.PUBLIC, true);
 
-    res.json(pub.children?.filter(f => f.isDirectory()).map(f => {
+    res.json(pub?.children?.filter(f => f.isDirectory()).map(f => {
       let title = 'Meine CoLa App';
       let description = undefined;
       const manifest = f.children?.find(c => c.name === 'manifest.json');
