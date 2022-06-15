@@ -1,35 +1,26 @@
-import { WorkshopDetail, WorkshopOverview } from '@routes/v1/vcl/workshops/workshops';
+import { WorkshopDetail, WorkshopOverview, LessonOverview } from '@routes/v1/vcl/workshops/workshops';
+import { File } from '@util/file/file.model';
+import { FileTree } from '@util/file/file-reader';
+import path from 'path';
+import { PATHS } from '@config/environment';
 
-export const WorkshopOverviewMock: WorkshopOverview[] = [
-  {
-    id: '123',
-    title: 'coding',
-    description: 'coding is nice',
-    image: '',
-    lessonsCount: 3,
-    difficulty: 'easy',
-    categories: ['coding'],
-  },
-];
+export const WorkshopOverviewMock: WorkshopOverview[] = [];
+export const WorkshopDetailsMock: WorkshopDetail[] = [];
 
-export const WorkshopDetailsMock: WorkshopDetail[] = WorkshopOverviewMock.map(ws => {
-  return {
-    ...ws, lessonsCount: undefined, lessons: [
-      {
-        id: '1',
-        title: 'first',
-        stepsCount: 1,
-      },
-      {
-        id: '2',
-        title: 'second',
-        stepsCount: 1,
-      },
-      {
-        id: '3',
-        title: 'third',
-        stepsCount: 2,
-      },
-    ],
-  };
+const workshopFolder = path.join(PATHS.ASSETS, 'workshopData');
+const workshopFileTree: File = FileTree(workshopFolder, true);
+
+workshopFileTree.children.forEach((workshop) => {
+  const workshopMetaFile = workshop.children.find((x) => x.name === 'meta.json');
+  const workshopMetaData = JSON.parse(workshopMetaFile.content);
+  const lessonsMeta: LessonOverview[] = [];
+  WorkshopOverviewMock.push(workshopMetaData.meta);
+  workshopMetaData.lessons.forEach((lesson: any) => {
+    lessonsMeta.push(lesson.meta);
+  });
+  WorkshopDetailsMock.push({
+    ...workshopMetaData.meta,
+    lessonsCount: workshopMetaData.lessons.length,
+    lessons: lessonsMeta,
+  });
 });

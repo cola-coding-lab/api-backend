@@ -1,0 +1,39 @@
+{
+    "meta": {
+        "id": "workshop1",
+        "title": "coding in CASTANA environment with only LF",
+        "description": "test meta.json",
+        "image": "",
+        "lessonsCount": 3,
+        "difficulty": "easy",
+        "categories": [
+            "coding"
+        ]
+    },
+    "lessons": [
+        {
+            "meta": {
+                "id": "lesson1",
+                "title": "Lektion 1",
+                "stepsCount": 3
+            },
+            "steps": []
+        },
+        {
+            "meta": {
+                "id": "lesson2",
+                "title": "Lektion 2",
+                "stepsCount": 2
+            },
+            "steps": []
+        },
+        {
+            "meta": {
+                "id": "lesson3",
+                "title": "Lektion 3",
+                "stepsCount": 1
+            },
+            "steps": []
+        }
+    ]
+}

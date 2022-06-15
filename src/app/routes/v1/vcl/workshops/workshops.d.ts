@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 export interface WorkshopOverview {
   id: string;
   title: string;

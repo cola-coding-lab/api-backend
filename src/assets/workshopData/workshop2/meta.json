@@ -1,0 +1,14 @@
+{
+    "meta": {
+        "id": "workshop2",
+        "title": "coding in CASTANA environment with only LF",
+        "description": "test meta.json 2",
+        "image": "",
+        "lessonsCount": 3,
+        "difficulty": "easy",
+        "categories": [
+            "coding"
+        ]
+    },
+    "lessons": []
+}

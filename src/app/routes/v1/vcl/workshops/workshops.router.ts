@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { BaseRouter, Validators } from '@routes/base.router';
 import { Request, Response } from 'express';
 import { requestDetails } from '@util/request';
