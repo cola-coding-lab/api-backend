@@ -22,10 +22,29 @@ export interface WorkshopDetail {
 export interface LessonOverview {
   id: string;
   title: string;
+  description: string;
   stepsCount: number;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Lesson {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  steps: Step[];
+}
 
+export interface Step {
+  id: string;
+  title: string;
+  description: string;
+  isOptional: boolean;
+  code: Code[];
+  hint: string;
+}
+
+export interface Code {
+  name: string;
+  type: string;
+  content: string;
 }

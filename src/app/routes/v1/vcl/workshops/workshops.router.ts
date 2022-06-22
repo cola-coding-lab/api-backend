@@ -32,4 +32,5 @@ export class WorkshopsRouter extends BaseRouter {
       [ new ResponseError(RESPONSE_CODES.NOT_FOUND, `could not find workshop with id [${id}]`) ],
       RESPONSE_CODES.NOT_FOUND);
   }
+
 }
