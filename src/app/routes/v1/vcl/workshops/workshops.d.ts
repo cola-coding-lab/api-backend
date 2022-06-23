@@ -32,6 +32,7 @@ export interface Lesson {
   description: string;
   image: string;
   steps: Step[];
+  codeFiles: CodeFile[];
 }
 
 export interface Step {
@@ -39,11 +40,10 @@ export interface Step {
   title: string;
   description: string;
   isOptional: boolean;
-  code: Code[];
   hint: string;
 }
 
-export interface Code {
+export interface CodeFile {
   name: string;
   type: string;
   content: string;
