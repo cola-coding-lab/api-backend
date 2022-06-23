@@ -44,7 +44,7 @@ workshopFileTree.children.forEach((workshop: File) => {
     lessonsData.push({
       ...lesson.meta,
       steps: stepsData,
-      codeFiles: codeData,
+      code: codeData,
     });
   });
 
