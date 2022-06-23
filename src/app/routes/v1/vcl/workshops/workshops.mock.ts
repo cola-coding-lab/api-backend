@@ -31,7 +31,7 @@ workshopFileTree.children.forEach((workshop: File) => {
     });
 
     //build codeData from files in the current lesson folder
-    lessonFolder.children.forEach((child: File) => {
+    lessonFolder?.children.forEach((child: File) => {
       if (child.type === 'file') {
         codeData.push({
           name: child.name,
