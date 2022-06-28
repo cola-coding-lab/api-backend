@@ -16,7 +16,8 @@ export interface WorkshopDetail {
   image: string;
   difficulty: string;
   categories: string[];
-  lessons: LessonOverview[];
+  lessonsOverview: LessonOverview[];
+  lessons: Lesson [];
 }
 
 export interface LessonOverview {
@@ -40,6 +41,7 @@ export interface Step {
   title: string;
   description: string;
   isOptional: boolean;
+  images: string[];
   hint: string;
 }
 

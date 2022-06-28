@@ -1,0 +1,11 @@
+{
+    "workshop" : {
+        "id": "flappy_workshop",
+        "title": "Flappy Bird",
+        "description": "This will be overwritten by description.md",
+        "difficulty": "easy",
+        "categories": [
+            "coding"
+        ]
+    }
+}

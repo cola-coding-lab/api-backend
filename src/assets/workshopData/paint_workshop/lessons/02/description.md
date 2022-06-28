@@ -1,0 +1,1 @@
+Exportiere deine App und mache sie mittels QR-Code verfügbar

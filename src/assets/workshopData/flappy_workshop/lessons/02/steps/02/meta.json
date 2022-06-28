@@ -1,0 +1,9 @@
+{
+    "step": {
+        "id": "step2",
+        "title": "Erstellen von Hindernissen und Kollisionsabfrage",
+        "description": "This will be overwritten by description.md",
+        "isOptional": false,
+        "hint": false
+    }
+}
