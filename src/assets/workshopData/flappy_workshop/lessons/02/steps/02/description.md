@@ -36,5 +36,5 @@ Und die Kollision abfragen
 
 ![A picture containing graphical user interface Description
 automatically
-generated](./img/media/image7.png){width="6.268055555555556in"
+generated](./assets/image7.png){width="6.268055555555556in"
 height="2.8375in"}

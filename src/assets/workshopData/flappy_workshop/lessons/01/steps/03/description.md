@@ -17,5 +17,5 @@ Und etwas Logik, dass der Ball nur etwas nach oben geht
 > }
 
 ![Graphical user interface Description automatically
-generated](./img/media/image5.png){width="5.948536745406824in"
+generated](./assets/image5.png){width="5.948536745406824in"
 height="2.506347331583552in"}

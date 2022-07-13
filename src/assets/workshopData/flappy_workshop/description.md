@@ -1,4 +1,4 @@
-![](./img/media/image11.png){width="2.250264654418198in"
+![](./assets/image11.png){width="2.250264654418198in"
 height="1.0803379265091864in"}
 
 ## Coding Lab − Wie kann ich meine eigene App entwickeln?
@@ -12,6 +12,7 @@ Erfahrungen als Spieleentwicklerin oder Spielentwickler sammeln.
 
 Erstelle deine eigene Variante von Flappy Bird für dein Smartphone in
 ein paar einfachen Schritten.
+<!-- 
 _______________________
 
 **Schritt 1:**
@@ -20,13 +21,13 @@ Starte mit dem Cola Editor ein neues Projekt unter
 <https://cola.fh-joanneum.at/editor/>
 
 ![Graphical user interface, application, Teams Description automatically
-generated](./img/media/image2.png){width="3.9994116360454943in"
+generated](./assets/image2.png){width="3.9994116360454943in"
 height="2.815009842519685in"}
 
 Und beginne mit dem Programmieren
 
 ![Graphical user interface, application Description automatically
-generated](./img/media/image3.png){width="4.127972440944882in"
+generated](./assets/image3.png){width="4.127972440944882in"
 height="1.943248031496063in"}
 
 **Schritt 2:**
@@ -55,7 +56,7 @@ Zeichen-Funktion
 
 ![A picture containing graphical user interface Description
 automatically
-generated](./img/media/image4.png){width="6.268055555555556in"
+generated](./assets/image4.png){width="6.268055555555556in"
 height="2.859722222222222in"}
 
 Aufgabe: ändere die Farbe, Größe oder Geschwindigkeit des Balls
@@ -81,7 +82,7 @@ Und etwas Logik, dass der Ball nur etwas nach oben geht
 > }
 
 ![Graphical user interface Description automatically
-generated](./img/media/image5.png){width="5.948536745406824in"
+generated](./assets/image5.png){width="5.948536745406824in"
 height="2.506347331583552in"}
 
 **Schritt 4:**
@@ -115,7 +116,7 @@ gameIsRunning=false
 }
 
 ![Graphical user interface, application Description automatically
-generated](./img/media/image6.png){width="6.268055555555556in"
+generated](./assets/image6.png){width="6.268055555555556in"
 height="2.8319444444444444in"}
 
 **Schritt 5:**
@@ -158,7 +159,7 @@ Und die Kollision abfragen
 
 ![A picture containing graphical user interface Description
 automatically
-generated](./img/media/image7.png){width="6.268055555555556in"
+generated](./assets/image7.png){width="6.268055555555556in"
 height="2.8375in"}
 
 **Schritt 6:**
@@ -196,25 +197,25 @@ Gegner, Bosse, ...
 Um die App auf dein Smartphone zu bekommen, gehe auf **Export als PWA**
 
 ![Graphical user interface, text, application Description automatically
-generated](./img/media/image8.png){width="5.620155293088364in"
+generated](./assets/image8.png){width="5.620155293088364in"
 height="2.014314304461942in"}
 
 Gib einen Namen und eine Beschreibung für deine App ein
 
 ![Graphical user interface, application Description automatically
-generated](./img/media/image9.png){width="3.5789096675415575in"
+generated](./assets/image9.png){width="3.5789096675415575in"
 height="2.138384733158355in"}
 
 Gehe auf den Link oder scanne den QR Code mit deinem Smartphone.
 
 ![Qr code Description automatically
-generated](./img/media/image10.png){width="3.298423009623797in"
+generated](./assets/image10.png){width="3.298423009623797in"
 height="2.461573709536308in"}
 
 Fertig ist dein eigenes Flappy-Game.
 
 ![Graphical user interface, text, application Description automatically
-generated](./img/media/image11.png){width="2.6073097112860895in"
+generated](./assets/image11.png){width="2.6073097112860895in"
 height="2.7485914260717412in"}
 
-<https://vcl-api.rigbit.at/public/f0b29d4c-b292-5abb-9a44-62c5486ef97e/>
+<https://vcl-api.rigbit.at/public/f0b29d4c-b292-5abb-9a44-62c5486ef97e/> -->

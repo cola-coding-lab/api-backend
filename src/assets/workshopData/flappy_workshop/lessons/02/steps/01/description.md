@@ -1,5 +1,3 @@
-Nun etwas Gamelogik: wenn der Ball den Boden erreicht, ist Game-Over
-
 Variable
 
 let gameIsRunning=true
@@ -27,5 +25,5 @@ gameIsRunning=false
 }
 
 ![Graphical user interface, application Description automatically
-generated](./img/media/image6.png){width="6.268055555555556in"
+generated](./assets/image6.png){width="6.268055555555556in"
 height="2.8319444444444444in"}

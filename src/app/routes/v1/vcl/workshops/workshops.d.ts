@@ -3,7 +3,7 @@ export interface WorkshopOverview {
   id: string;
   title: string;
   description: string;
-  image: string;
+  assets: string[];
   lessonsCount: number;
   difficulty: string;
   categories: string[];
@@ -13,7 +13,7 @@ export interface WorkshopDetail {
   id: string;
   title: string;
   description: string;
-  image: string;
+  assets: string[];
   difficulty: string;
   categories: string[];
   lessonsOverview: LessonOverview[];
@@ -31,7 +31,7 @@ export interface Lesson {
   id: string;
   title: string;
   description: string;
-  image: string;
+  assets: string[];
   steps: Step[];
   codeFiles: CodeFile[];
 }
@@ -41,7 +41,7 @@ export interface Step {
   title: string;
   description: string;
   isOptional: boolean;
-  images: string[];
+  assets: string[];
   hint: string;
 }
 
