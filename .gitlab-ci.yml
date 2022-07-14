@@ -1,6 +1,4 @@
-stages:          # List of stages for jobs, and their order of execution
-#  - build
-#  - test
+stages:
   - deploy
 
 ## https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#docker-in-docker-with-tls-disabled-in-the-docker-executor
@@ -9,7 +7,7 @@ variables:
   DOCKER_TLS_CERTDIR: ""
 
 services:
-  - docker:20.10.14-dind
+  - docker:20.10.17-dind
 
 before_script:
   - docker info
@@ -41,10 +39,10 @@ before_script:
     - git clean -ffdx
 
 
-deploy:      # This job runs in the deploy stage.
-  image: docker:20.10.14
+deploy:
+  image: docker:20.10.17
   extends: .prepare
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  stage: deploy
   after_script:
     - docker logout $REGISTRY_URL
   script:
@@ -54,3 +52,5 @@ deploy:      # This job runs in the deploy stage.
     - docker build . -t $REGISTRY_URL/vcl-api:latest
     - docker push $REGISTRY_URL/vcl-api:latest
     - echo "Application successfully deployed."
+  only:
+    - develop
