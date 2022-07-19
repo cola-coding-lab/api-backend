@@ -1,0 +1,7 @@
+{
+    "lesson": {
+        "id": "lesson1",
+        "title": "Lektion 01",
+        "description": "This will be overwritten by description.md"
+    }
+}

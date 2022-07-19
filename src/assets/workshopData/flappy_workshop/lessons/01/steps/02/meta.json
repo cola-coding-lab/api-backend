@@ -1,0 +1,9 @@
+{
+    "step": {
+        "id": "step2",
+        "title": "Objekterstellung",
+        "description": "This will be overwritten by description.md",
+        "isOptional": false,
+        "hint": false
+    }
+}
