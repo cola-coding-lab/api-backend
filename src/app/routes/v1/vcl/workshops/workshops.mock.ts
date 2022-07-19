@@ -1,11 +1,11 @@
 /* eslint-disable linebreak-style */
 import {
-  WorkshopDetail,
-  WorkshopOverview,
+  CodeFile,
+  Lesson,
   LessonOverview,
   Step,
-  Lesson,
-  CodeFile,
+  WorkshopDetail,
+  WorkshopOverview,
 } from '@routes/v1/vcl/workshops/workshops';
 import { File } from '@util/file/file.model';
 import { FileTree } from '@util/file/file-reader';
@@ -14,8 +14,7 @@ import { PATHS, PORT } from '@config/environment';
 import { Request } from 'express';
 
 export function getWorkshopData(req: Request) {
-  const urlAssets = `${req.protocol}://${req.hostname}:${PORT}${req.originalUrl}/assets`;
-  const imageExtensions = ['.png', '.jpg', '.jpeg'];
+  const imageExtensions = [ '.png', '.jpg', '.jpeg' ];
   const mdImgRegex = /(!\[[\s\S.]*\])\(.+\.png|\.jpe?g\)/g;
 
   const WorkshopOverviewMock: WorkshopOverview[] = [];
@@ -31,11 +30,12 @@ export function getWorkshopData(req: Request) {
     const workshopDescriptionFile: File = workshop.children.find((x) => x.name === 'description.md');
     const workshopMetaFileContent = JSON.parse(workshopMetaFile.content).workshop;
     const workshopAssets: string[] = [];
+    const assetsUri = `${req.protocol}://${req.hostname}:${PORT}${req.baseUrl}/${req.params.key || workshop.name}/assets`;
 
     //find Images
     workshop.children.forEach((file: File) => {
       if (imageExtensions.includes(file?.ext)) {
-        workshopAssets.push(`${urlAssets}/${file.name}`);
+        workshopAssets.push(`${assetsUri}/${file.name}`);
       }
     });
 
@@ -48,7 +48,7 @@ export function getWorkshopData(req: Request) {
 
     //edit description
     if (typeof workshopDescriptionFile !== 'undefined') {
-      workshopOverview.description = _editDescription(workshopDescriptionFile, 'workshop');
+      workshopOverview.description = _editDescription(workshopDescriptionFile, 'workshop', assetsUri);
     }
 
     WorkshopOverviewMock.push(workshopOverview);
@@ -69,7 +69,7 @@ export function getWorkshopData(req: Request) {
       //find Images
       lesson.children.forEach((file: File) => {
         if (imageExtensions.includes(file?.ext)) {
-          lessonAssets.push(`${urlAssets}/lessons/${lesson.name}/${file.name}`);
+          lessonAssets.push(`${assetsUri}/lessons/${lesson.name}/${file.name}`);
         }
       });
 
@@ -81,7 +81,7 @@ export function getWorkshopData(req: Request) {
 
       if (typeof lessonDescriptionFile !== 'undefined') {
         //lessonOverview.description = lessonDescriptionFile.content;
-        lessonOverview.description = _editDescription(lessonDescriptionFile, 'lesson', lesson.name);
+        lessonOverview.description = _editDescription(lessonDescriptionFile, 'lesson', assetsUri, lesson.name);
       }
       lessonsOverview.push(lessonOverview);
 
@@ -108,7 +108,7 @@ export function getWorkshopData(req: Request) {
         //find images
         step.children.forEach((file: File) => {
           if (imageExtensions.includes(file?.ext)) {
-            stepImages.push(`${urlAssets}/lessons/${lesson.name}/steps/${step.name}/${file.name}`);
+            stepImages.push(`${assetsUri}/lessons/${lesson.name}/steps/${step.name}/${file.name}`);
           }
         });
 
@@ -117,7 +117,7 @@ export function getWorkshopData(req: Request) {
           assets: stepImages,
         };
         if (typeof stepDescriptionFile !== 'undefined') {
-          stepDetail.description = _editDescription(stepDescriptionFile, 'step', lesson.name, step.name);
+          stepDetail.description = _editDescription(stepDescriptionFile, 'step', assetsUri, lesson.name, step.name);
         }
         steps.push(stepDetail);
       });
@@ -145,19 +145,19 @@ export function getWorkshopData(req: Request) {
   };
 
   /* ***************************************************************************************************** */
-  function _editDescription(mdFile: File, type: string, lessonName?: string, stepName?: string) {
+  function _editDescription(mdFile: File, type: string, baseImgUri: string, lessonName?: string, stepName?: string) {
     let description = mdFile?.content;
     if (Array.isArray(description.match(mdImgRegex)) === true) {
       let replaceString: string;
       switch (type) {
         case 'workshop':
-          replaceString = `$1(${urlAssets}/$2)`;
+          replaceString = `$1(${baseImgUri}/$2)`;
           break;
         case 'lesson':
-          replaceString = `$1(${urlAssets}/lessons/${lessonName}/$2)`;
+          replaceString = `$1(${baseImgUri}/lessons/${lessonName}/$2)`;
           break;
         case 'step':
-          replaceString = `$1(${urlAssets}/lessons/${lessonName}/steps/${stepName}/$2)`;
+          replaceString = `$1(${baseImgUri}/lessons/${lessonName}/steps/${stepName}/$2)`;
           break;
       }
 
@@ -165,7 +165,7 @@ export function getWorkshopData(req: Request) {
         ///(!\[[\s\S]*\])\((.+\.png|\.jpe?g)\)/,
         ///(!\[[\s\S]*?\])\(.+\/(.*\.png|\.jpe?g)\)/g,
         /(!\[[\s\S]*?\])\((?!https?:\/\/).+\/(.*\.png|\.jpe?g)\)/g,
-        replaceString
+        replaceString,
       );
     }
     return description;
