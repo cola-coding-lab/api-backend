@@ -2,7 +2,7 @@
 import { BaseRouter, Validators } from '@routes/base.router';
 import { Request, Response } from 'express';
 import { requestDetails } from '@util/request';
-import { getWorkshopData } from '@routes/v1/vcl/workshops/workshops.mock';
+import { getWorkshopData } from '@routes/v1/vcl/workshops/workshops';
 import { errorResponse, ResponseError } from '@util/response';
 import { RESPONSE_CODES } from '@config/constants';
 import path from 'path';
@@ -14,10 +14,9 @@ export class WorkshopsRouter extends BaseRouter {
 
   protected async getAll(req: Request, res: Response): Promise<void> {
     const workshopData = getWorkshopData(req);
-    const workshopOverviewMock = workshopData.WorkshopOverviewMock;
     this.format(req, res, {
       plain: '',
-      json: { workshopOverviewMock, ...requestDetails(req) },
+      json: { WorkshopOverview: workshopData.WorkshopOverview, ...requestDetails(req) },
     });
   }
 
@@ -30,11 +29,10 @@ export class WorkshopsRouter extends BaseRouter {
   }
 
   protected async getByKey(req: Request, res: Response): Promise<void> {
-
     const id = req.params.key;
     const workshopData = getWorkshopData(req);
-    const workshopDetailsMock = workshopData.WorkshopDetailsMock;
-    const workshop = workshopDetailsMock?.find((ws) => ws.id === id);
+    const workshopDetails = workshopData.WorkshopDetails;
+    const workshop = workshopDetails?.find((ws) => ws.id === id);
 
     if (workshop) {
       return this.format(req, res, {

@@ -6,7 +6,7 @@ import {
   Step,
   WorkshopDetail,
   WorkshopOverview,
-} from '@routes/v1/vcl/workshops/workshops';
+} from '@routes/v1/vcl/workshops/workshops.d';
 import { File } from '@util/file/file.model';
 import { FileTree } from '@util/file/file-reader';
 import path from 'path';
@@ -17,8 +17,8 @@ export function getWorkshopData(req: Request) {
   const imageExtensions = [ '.png', '.jpg', '.jpeg' ];
   const mdImgRegex = /(!\[[\s\S.]*\])\(.+\.png|\.jpe?g\)/g;
 
-  const WorkshopOverviewMock: WorkshopOverview[] = [];
-  const WorkshopDetailsMock: WorkshopDetail[] = [];
+  const WorkshopOverview: WorkshopOverview[] = [];
+  const WorkshopDetails: WorkshopDetail[] = [];
 
   const workshopFolder = path.join(PATHS.ASSETS, 'workshopData');
   const workshopFileTree: File = FileTree(workshopFolder, true);
@@ -51,7 +51,7 @@ export function getWorkshopData(req: Request) {
       workshopOverview.description = _editDescription(workshopDescriptionFile, 'workshop', assetsUri);
     }
 
-    WorkshopOverviewMock.push(workshopOverview);
+    WorkshopOverview.push(workshopOverview);
 
     //build workshopDetail
     const lessonsOverview: LessonOverview[] = [];
@@ -136,12 +136,12 @@ export function getWorkshopData(req: Request) {
       lessons: lessonsDetail,
     };
 
-    WorkshopDetailsMock.push(workshopDetail);
+    WorkshopDetails.push(workshopDetail);
   });
 
   return {
-    WorkshopOverviewMock: WorkshopOverviewMock,
-    WorkshopDetailsMock: WorkshopDetailsMock,
+    WorkshopOverview,
+    WorkshopDetails,
   };
 
   /* ***************************************************************************************************** */
