@@ -5,11 +5,11 @@ function setup() {
   
   function draw() {
         fill(color('red'));
-        //circle (200,150, 20)
+        circle (200, 150, 20)
   }
   
   
-  function mouseDragged() {
-      fill(color('red'));
-      circle(mouseX, mouseY, 20); 
-  }
+//   function mouseDragged() {
+//       fill(color('red'));
+//       circle(mouseX, mouseY, 20); 
+// }

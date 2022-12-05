@@ -1,7 +1,7 @@
 {
     "step": {
         "id": "step3",
-        "title": "Kreis zeichnen",
+        "title": "Zeichnen",
         "description": "This will be overwritten by description.md",
         "isOptional": false,
         "hint": false

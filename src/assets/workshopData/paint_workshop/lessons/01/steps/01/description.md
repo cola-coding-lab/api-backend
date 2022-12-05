@@ -1,5 +1,14 @@
-Starte mit dem Cola Editor ein neues Projekt unter
-<https://cola.fh-joanneum.at/editor/>
+## Start
+Und beginne mit dem Programmieren
 
-![Graphical user interface, application, Teams Description automatically
-generated](./assets/image3.png)
+```
+function setup() {
+    createCanvas(400, 400);
+    background("white");
+}
+
+function draw() {
+
+}
+```
+![Graphical user interface](./image3.png)

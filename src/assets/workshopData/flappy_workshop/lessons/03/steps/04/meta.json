@@ -1,7 +1,7 @@
 {
     "step": {
-        "id": "step2",
-        "title": "Hindernisse und Kollisionsabfrage",
+        "id": "step4",
+        "title": "Fertig",
         "description": "This will be overwritten by description.md",
         "isOptional": false,
         "hint": false

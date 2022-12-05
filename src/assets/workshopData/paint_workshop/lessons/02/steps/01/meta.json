@@ -1,7 +1,7 @@
 {
     "step": {
-        "id": "step1",
-        "title": "App exportieren",
+        "id": "step4",
+        "title": "Exportieren der App",
         "description": "This will be overwritten by description.md",
         "isOptional": false,
         "hint": false

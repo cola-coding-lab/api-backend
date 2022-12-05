@@ -10,8 +10,9 @@ import {
 import { File } from '@util/file/file.model';
 import { FileTree } from '@util/file/file-reader';
 import path from 'path';
-import { PATHS, PORT } from '@config/environment';
+import { PATHS } from '@config/environment';
 import { Request } from 'express';
+import { requestUri } from '@util/request';
 
 export function getWorkshopData(req: Request) {
   const imageExtensions = [ '.png', '.jpg', '.jpeg' ];
@@ -30,7 +31,8 @@ export function getWorkshopData(req: Request) {
     const workshopDescriptionFile: File = workshop.children.find((x) => x.name === 'description.md');
     const workshopMetaFileContent = JSON.parse(workshopMetaFile.content).workshop;
     const workshopAssets: string[] = [];
-    const assetsUri = `${req.protocol}://${req.hostname}:${PORT}${req.baseUrl}/${req.params.key || workshop.name}/assets`;
+    const reqUri = requestUri(req);
+    const assetsUri = `${reqUri.protocol}://${reqUri.host}${reqUri.location}${reqUri.baseUrl}/${req.params.key || workshop.name}/assets`;
 
     //find Images
     workshop.children.forEach((file: File) => {
@@ -90,7 +92,7 @@ export function getWorkshopData(req: Request) {
       const codeFiles: CodeFile[] = [];
 
       //iterate through codeFiles
-      lessonCodeFolder.children.forEach((codeFile: File) => {
+      lessonCodeFolder?.children.forEach((codeFile: File) => {
         codeFiles.push({
           name: codeFile.name,
           type: 'text/javascript',

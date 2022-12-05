@@ -1,7 +1,7 @@
 {
     "step": {
         "id": "step1",
-        "title": "Spiellogik einbauen",
+        "title": "Spiellogik",
         "description": "This will be overwritten by description.md",
         "isOptional": false,
         "hint": false
