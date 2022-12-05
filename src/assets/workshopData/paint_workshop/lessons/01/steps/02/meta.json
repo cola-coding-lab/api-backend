@@ -1,7 +1,7 @@
 {
     "step": {
         "id": "step2",
-        "title": "Programmieren starten",
+        "title": "Coden",
         "description": "This will be overwritten by description.md",
         "isOptional": false,
         "hint": false

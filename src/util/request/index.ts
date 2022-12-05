@@ -1,1 +1,1 @@
-export { requestDetails } from './details';
+export { requestDetails, requestUri } from './details';

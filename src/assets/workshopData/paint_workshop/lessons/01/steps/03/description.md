@@ -1,14 +1,12 @@
-Zeichne einen Kreis mit folgendem Code
+## Zeichnen
+Nun fügen wir noch eine weitere Funktion hinzu, damit du dein künstlerische Seite zeigen kannst...
 
- 	
-     fill(color(\'red\'));
-     circle (200,150, 20)
+```
+function mouseDragged) {
+    fill(color('red'));
+    circle (mouseX, mouseY, 20);
+}
+```
 
-![Graphical user interface, application Description automatically
-generated](./assets/image5.png)
-
-Aufgabe: Zeichen weitere Kreise, dazu kanns du die X und Y Koordinate,
-den Radius oder die Farbe ändern
-
-	fill(color('blue'));
-	circle (100,50, 400)
+![Graphical user interface](./image5.png)
+	

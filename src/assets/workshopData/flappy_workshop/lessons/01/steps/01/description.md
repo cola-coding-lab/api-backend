@@ -1,6 +1,4 @@
-Und beginne mit dem Programmieren
+Nun können wir mit dem Programmieren beginnen
 
 ![Graphical user interface, application Description automatically
-generated](./assets/image3.png){width="4.127972440944882in"
-height="1.943248031496063in"}
-<img src="image3" width="40%">
+generated](./image3.png)
