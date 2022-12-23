@@ -1,4 +1,5 @@
 stages:
+  - build
   - deploy
 
 ## https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#docker-in-docker-with-tls-disabled-in-the-docker-executor
@@ -7,50 +8,21 @@ variables:
   DOCKER_TLS_CERTDIR: ""
 
 services:
-  - docker:20.10.17-dind
+  - docker:20.10.22-dind
 
 before_script:
-  - docker info
+  - docker info -f '{{ .ServerVersion }}'
 
-
-.prepare:
-  variables:
-    GIT_STRATEGY: none
-  before_script:
-    - 'which ssh-agent || ( apk update && apk add openssh )'
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - 'which git || ( apk update && apk add git )'
-    - |
-      if [ ! -d "${CI_PROJECT_DIR}/.git" ]
-      then
-          echo "inside IF ... ${CI_PROJECT_DIR}"
-          mkdir -p "${CI_PROJECT_DIR}"
-          cd "${CI_PROJECT_DIR}"
-          git init
-          git remote add origin "ssh://git@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
-      fi
-    - cd "${CI_PROJECT_DIR}"
-    - git fetch origin
-    - git checkout "${CI_COMMIT_SHA}"
-    - git reset --hard HEAD
-    - git clean -ffdx
-
-
-deploy:
-  image: docker:20.10.17
-  extends: .prepare
-  stage: deploy
+build-image:
+  image: docker:20.10.22
+  tags:
+    - dind
+  stage: build
   after_script:
-    - docker logout $REGISTRY_URL
+    - docker logout $CI_REGISTRY
   script:
-    - echo "Deploying application..."
-    - ls
-    - docker login $REGISTRY_URL -u $REGISTRY_USER -p $REGISTRY_PASS
-    - docker build . -t $REGISTRY_URL/vcl-api:latest
-    - docker push $REGISTRY_URL/vcl-api:latest
-    - echo "Application successfully deployed."
-  only:
-    - develop
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build . -t $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
+  # only:
+  #   - develop
