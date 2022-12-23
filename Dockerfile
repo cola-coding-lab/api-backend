@@ -1,6 +1,6 @@
 ### Dockerfile with multi-stage build ###
 # used node-version
-ARG NODE_VERSION=16-stretch
+ARG NODE_VERSION=18
 
 ## stage 1, compile TypeScript
 FROM node:${NODE_VERSION} AS builder
@@ -17,7 +17,7 @@ COPY .eslintignore   ./
 COPY ./src           ./src
 
 ## update npm to latest version
-RUN npm install -g npm@latest
+RUN npm install --location=global npm@latest
 
 RUN npm ci --silent && npm run build
 
@@ -32,7 +32,7 @@ ENV SERVICE_PORT=8065
 COPY package*.json   ./
 
 ## update npm to latest version
-RUN npm install -g npm@latest
+RUN npm install --location=global npm@latest
 
 RUN npm ci --silent --only=${NODE_ENV}
 
