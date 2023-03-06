@@ -1,1 +1,0 @@
-Gestalten Sie Ihre eigene App und entwerfen Sie so Ihren ersten eigenen Prototypen. Auch die Größeren kommen hier nicht zu kurz, denn diese können hier bereits ihr erstes Spiel implementieren und so erste Erfahrungen als Spieleentwicklerin oder Spielentwickler sammeln.
