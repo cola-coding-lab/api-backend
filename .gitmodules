@@ -1,3 +1,3 @@
-[submodule "src/assets/workshops"]
-	path = src/assets/workshops
+[submodule "workshops"]
+	path = workshops
 	url = git@mode.fh-joanneum.at:cola/vcl/workshops.git

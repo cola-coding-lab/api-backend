@@ -9,7 +9,7 @@ const LOGGER = LogFactory('FileReader');
 const CACHE = new Map<string, File>();
 
 export function FileTree(start = '', noCache = false): File {
-  const dir = path.isAbsolute(start) ? start : path.join(PATHS.ASSETS, start);
+  const dir = getAbsolutePath(start);
   if (fs.existsSync(dir) && fs.lstatSync(dir).isDirectory()) {
     const existing = CACHE.get(dir);
     if (!noCache && existing) {
@@ -23,6 +23,15 @@ export function FileTree(start = '', noCache = false): File {
   }
 
   return undefined;
+}
+
+function getAbsolutePath(p: string, base = PATHS.ASSETS): string {
+  const absolute = path.isAbsolute(p) ? p : path.join(base, p);
+  if (fs.lstatSync(absolute).isSymbolicLink()) {
+    const target = fs.readlinkSync(absolute);
+    return getAbsolutePath(target);
+  }
+  return absolute;
 }
 
 function readRecursive(base: File): File {
