@@ -6,6 +6,7 @@ stages:
 variables:
   DOCKER_HOST: tcp://docker:2375
   DOCKER_TLS_CERTDIR: ""
+  GIT_SUBMODULE_STRATEGY: recursive
 
 services:
   - docker:20.10.22-dind
