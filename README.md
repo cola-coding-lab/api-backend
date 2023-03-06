@@ -3,7 +3,6 @@
 Node.js/Express based ReST API for [CoLa](https://cola.fh-joanneum.at/) project.  
 Especially for the [Online Editor](https://mode.fh-joanneum.at/cola/editor/online-editor).
 
-~~Based on [ts-ws-template](https://github.com/Rigbin/ts-ws-template)~~  
 Rewrite, based on [express-ts](https://github.com/Rigbin/express-ts)
 
 by [Harald Schwab](mailto:harald.schwab2@fh-joanneum.at)
@@ -14,9 +13,6 @@ For full documentation, see [here](./doc/).
 
 API/Backend for [VCL Frontend](https://mode.fh-joanneum.at/cola/vcl/frontend).
 
-**Planned features:**
-
-* TODO...
 
 ## Prerequisites
 
