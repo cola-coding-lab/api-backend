@@ -23,7 +23,7 @@ export class WorkshopsRouter extends BaseRouter {
   protected async routes(_validators?: Validators): Promise<void> {
     super.routes(_validators);
     this.router.get('/:key/assets*', (req: Request, res: Response) => {
-      const file = path.join(PATHS.ASSETS, 'workshopData', req.params.key, req.params[0]);
+      const file = path.join(PATHS.ASSETS, 'workshops', req.params.key, req.params[0]);
       res.download(file);
     });
   }

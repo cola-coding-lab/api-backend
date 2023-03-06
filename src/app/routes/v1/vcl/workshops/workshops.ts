@@ -21,7 +21,7 @@ export function getWorkshopData(req: Request) {
   const WorkshopOverview: WorkshopOverview[] = [];
   const WorkshopDetails: WorkshopDetail[] = [];
 
-  const workshopFolder = path.join(PATHS.ASSETS, 'workshopData');
+  const workshopFolder = path.join(PATHS.ASSETS, 'workshops');
   const workshopFileTree: File = FileTree(workshopFolder, true);
 
   //iterate through workshops
