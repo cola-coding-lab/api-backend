@@ -17,7 +17,7 @@ API/Backend for [VCL Frontend](https://mode.fh-joanneum.at/cola/vcl/frontend).
 ## Prerequisites
 
 When developing locally, you need [Node.js](https://nodejs.org/en/), we recommend the current (
-09.2021) [LTS 14.x](https://nodejs.org/dist/latest-v14.x/).
+03.2023) [LTS 18.x](https://nodejs.org/dist/latest-v18.x/).
 
 A useful tool to manage different versions of Node.js locally would be [NVM](https://github.com/nvm-sh/nvm).
 
