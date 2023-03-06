@@ -1,12 +1,12 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  express-ts:
+  api-service-dev:
     build:
       context: .
       dockerfile: Dockerfile
-    image: vcl-api-service
-    container_name: vcl-api-service
+    image: vcl-api-service-dev
+    container_name: vcl-api-service-dev
     restart: unless-stopped
     ports:
       - "8065:8065"
