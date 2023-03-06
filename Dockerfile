@@ -15,6 +15,8 @@ COPY tsconfig*.json  ./
 COPY .eslintrc.json  ./
 COPY .eslintignore   ./
 COPY ./src           ./src
+COPY ./workshops     ./workshops
+
 
 ## update npm to latest version
 RUN npm install --location=global npm@latest
