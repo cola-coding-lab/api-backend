@@ -1,0 +1,3 @@
+[submodule "src/assets/workshops"]
+	path = src/assets/workshops
+	url = git@mode.fh-joanneum.at:cola/vcl/workshops.git
