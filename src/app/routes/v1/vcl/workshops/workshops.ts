@@ -23,6 +23,9 @@ export function getWorkshopData(req: Request) {
 
   const workshopFolder = path.join(PATHS.ASSETS, 'workshops');
   const workshopFileTree: File = FileTree(workshopFolder, true);
+  workshopFileTree.children = workshopFileTree.children.filter(child => {
+    return child.isDirectory() && !child.isHidden();
+  });
 
   //iterate through workshops
   workshopFileTree.children.forEach((workshop: File) => {

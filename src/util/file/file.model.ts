@@ -101,6 +101,10 @@ export class File extends Serializable<SerializedFile> implements SerializedFile
     return this._stats.isFile();
   }
 
+  public isHidden(): boolean {
+    return this.name.startsWith('.');
+  }
+
   public addChild(file: File): void {
     if (this.children) {
       if (!this.children.find(child => child === file)) {
