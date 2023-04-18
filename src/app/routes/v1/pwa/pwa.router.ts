@@ -76,7 +76,7 @@ export class PwaRouter extends BaseRouter {
     const files = await this.compile(data);
     if (files) {
       await save2Public(files, { uuid });
-      res.setHeader('Location', PwaRouter.pwaUrl(req, data.base_href));
+      res.setHeader('Location', PwaRouter.pwaUrl(req, `/public/${uuid}/`));
       res.json(files);
     } else {
       await errorResponse(req, res, [ new ResponseError(RESPONSE_CODES.SERVER_ERROR, 'could not create pwa') ], RESPONSE_CODES.SERVER_ERROR);
