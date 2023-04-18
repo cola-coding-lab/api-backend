@@ -11,6 +11,7 @@ import { v4 } from 'uuid';
 import { save2Public } from '@util/pwa';
 import { Validate } from '@middleware/validation';
 import { PATHS } from '@config/environment';
+import { requestUri } from '@util/request';
 
 export enum Place {
   generated = 'generated',
@@ -30,7 +31,8 @@ export class PwaRouter extends BaseRouter {
   }
 
   private static pwaUrl(req: Request, base_href: string): string {
-    return `${req.protocol}://${req.header('host')}${base_href}`;
+    const reqUri = requestUri(req);
+    return `${reqUri.protocol}://${reqUri.host}${reqUri.location}${base_href}`;
   }
 
   protected async routes(_validators?: Validators): Promise<void> {
