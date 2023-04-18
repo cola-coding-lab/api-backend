@@ -1,7 +1,7 @@
 import { CONTENT_TYPES, RESPONSE_CODES } from '@config/constants';
 import { requestDetails } from '@util/request';
 import { NextFunction, Request, Response } from 'express';
-import { ValidationChain, ValidationError, validationResult } from 'express-validator';
+import { FieldValidationError, ValidationChain, ValidationError, validationResult } from 'express-validator';
 
 
 /** Validate-middleware to validate a list of `ValidationChain`s and automatically stop routing on error */
@@ -30,8 +30,8 @@ export function Validate(validations: ValidationChain[]): (req: Request, res: Re
 }
 
 function reduce(errors: ValidationError[]): string {
-  return errors.reduce((prev: string, { location, msg, param }: ValidationError) => {
-    return `${prev}\n${location}[${param}]: ${msg}`;
+  return errors.reduce((prev: string, { location, msg, type }: FieldValidationError) => {
+    return `${prev}\n${location}[${type}]: ${msg}`;
   }, '').trim();
 }
 
