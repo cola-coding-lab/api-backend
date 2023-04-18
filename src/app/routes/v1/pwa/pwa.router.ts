@@ -71,7 +71,8 @@ export class PwaRouter extends BaseRouter {
 
   protected async put(req: Request, res: Response): Promise<void> {
     const uuid = req.params.key || v4();
-    const data = { base_href: `/public/${uuid}/`, ...req.body };
+    const reqUri = requestUri(req);
+    const data = { base_href: `${reqUri.location}/public/${uuid}/`, ...req.body };
     const files = await this.compile(data);
     if (files) {
       await save2Public(files, { uuid });
